@@ -8,8 +8,6 @@ fn main() {
     dbg!(&args);
     println!("Args: {args:?}");
     println!("Pretty Args: {args:#?}");
-    // let query = &args[1];
-    // let file_path = &args[2];
 
     let config = Config::build(&args).unwrap_or_else(|err| {
         println!("Problem parsing arguments: {err}");
@@ -18,14 +16,10 @@ fn main() {
     println!("Searching for {}", config.query);
     println!("In the file {}", config.file_path);
 
-    // let contents =
-    //     fs::read_to_string(config.file_path).expect("Should have been able to read the file");
-
     if let Err(e) = run(config) {
         println!("Application error: {e}");
         process::exit(1);
     }
-    // println!("With text:\n{contents}");
 }
 
 fn run(config: Config) -> Result<(), Box<dyn Error>> {
@@ -50,20 +44,4 @@ impl Config {
 
         Ok(Config { query, file_path })
     }
-    // fn new(args: &[String]) -> Config {
-    //     if args.len() < 3 {
-    //         panic!("Not enough arguments");
-    //     }
-    //     let query = args[1].clone();
-    //     let file_path = args[2].clone();
-
-    //     Config { query, file_path }
-    // }
 }
-
-// fn parse_config(args: &[String]) -> Config {
-//     let query = &args[1].clone();
-//     let file_path = &args[2].clone();
-
-//     Config { query, file_path }
-// }
